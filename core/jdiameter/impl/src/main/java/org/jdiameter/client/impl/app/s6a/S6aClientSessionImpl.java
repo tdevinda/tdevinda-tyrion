@@ -262,31 +262,31 @@ public class S6aClientSessionImpl extends S6aSession implements ClientS6aSession
               break;
 
             case RECEIVE_ULA:
+              listener.doUpdateLocationAnswerEvent(this, (JUpdateLocationRequest) localEvent.getRequest(), (JUpdateLocationAnswer) localEvent.getAnswer());
               newState = S6aSessionState.TERMINATED;
               setState(newState);
               super.cancelMsgTimer();
-              listener.doUpdateLocationAnswerEvent(this, (JUpdateLocationRequest) localEvent.getRequest(), (JUpdateLocationAnswer) localEvent.getAnswer());
               break;
 
             case RECEIVE_AIA:
+              listener.doAuthenticationInformationAnswerEvent(this, (JAuthenticationInformationRequest) localEvent.getRequest(), (JAuthenticationInformationAnswer) localEvent.getAnswer());
               newState = S6aSessionState.TERMINATED;
               setState(newState);
               super.cancelMsgTimer();
-              listener.doAuthenticationInformationAnswerEvent(this, (JAuthenticationInformationRequest) localEvent.getRequest(), (JAuthenticationInformationAnswer) localEvent.getAnswer());
               break;
 
             case RECEIVE_PUA:
+              listener.doPurgeUEAnswerEvent(this, (JPurgeUERequest) localEvent.getRequest(), (JPurgeUEAnswer) localEvent.getAnswer());
               newState = S6aSessionState.TERMINATED;
               setState(newState);
               super.cancelMsgTimer();
-              listener.doPurgeUEAnswerEvent(this, (JPurgeUERequest) localEvent.getRequest(), (JPurgeUEAnswer) localEvent.getAnswer());
               break;
 
             case RECEIVE_NOA:
+              listener.doNotifyAnswerEvent(this, (JNotifyRequest) localEvent.getRequest(), (JNotifyAnswer) localEvent.getAnswer());
               newState = S6aSessionState.TERMINATED;
               setState(newState);
               super.cancelMsgTimer();
-              listener.doNotifyAnswerEvent(this, (JNotifyRequest) localEvent.getRequest(), (JNotifyAnswer) localEvent.getAnswer());
               break;
 
             default:
