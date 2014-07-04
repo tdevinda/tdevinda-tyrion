@@ -29,6 +29,7 @@ import org.jdiameter.api.RouteException;
 import org.jdiameter.api.app.AppSession;
 import org.jdiameter.api.app.StateMachine;
 import org.jdiameter.api.s6a.events.JAuthenticationInformationAnswer;
+import org.jdiameter.api.s6a.events.JCancelLocationAnswer;
 import org.jdiameter.api.s6a.events.JCancelLocationRequest;
 import org.jdiameter.api.s6a.events.JDeleteSubscriberDataRequest;
 import org.jdiameter.api.s6a.events.JInsertSubscriberDataRequest;
@@ -56,6 +57,19 @@ public interface ServerS6aSession extends AppSession, StateMachine {
    */
   void sendCancelLocationRequest(JCancelLocationRequest request) throws InternalException, IllegalDiameterStateException, RouteException, OverloadException;
 
+  /**
+   * Send Cancel-Location-Answer to server
+   * 
+   * @param answer Cancel-Location-Answer event instance
+   * @throws InternalException The InternalException signals that internal error is occurred.
+   * @throws IllegalDiameterStateException The IllegalStateException signals that session has incorrect state (invalid).
+   * @throws RouteException The NoRouteException signals that no route exist for a given realm.
+   * @throws OverloadException The OverloadException signals that destination host is overloaded.
+   */
+  void sendCancelLocationAnswer(JCancelLocationAnswer answer) throws InternalException, IllegalDiameterStateException, RouteException, OverloadException;
+
+  
+  
   /**
    * Send Insert-Subscriber-Data-Request to client
    * 

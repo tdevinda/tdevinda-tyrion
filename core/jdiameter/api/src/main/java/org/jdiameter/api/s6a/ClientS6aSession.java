@@ -30,6 +30,7 @@ import org.jdiameter.api.app.AppSession;
 import org.jdiameter.api.app.StateMachine;
 import org.jdiameter.api.s6a.events.JAuthenticationInformationRequest;
 import org.jdiameter.api.s6a.events.JCancelLocationAnswer;
+import org.jdiameter.api.s6a.events.JCancelLocationRequest;
 import org.jdiameter.api.s6a.events.JDeleteSubscriberDataAnswer;
 import org.jdiameter.api.s6a.events.JInsertSubscriberDataAnswer;
 import org.jdiameter.api.s6a.events.JNotifyRequest;
@@ -99,6 +100,16 @@ public interface ClientS6aSession extends AppSession, StateMachine {
   void sendCancelLocationAnswer(JCancelLocationAnswer answer) throws InternalException, IllegalDiameterStateException, RouteException, OverloadException;
 
   /**
+   * Send Cancel-Location request to the MME side
+   * @param request
+   * @throws InternalException
+   * @throws IllegalDiameterStateException
+   * @throws RouteException
+   * @throws OverloadException
+   */
+  void sendCancelLocationRequest(JCancelLocationRequest request) throws InternalException, IllegalDiameterStateException, RouteException, OverloadException;
+  
+  /**
    * Send Insert-Subscriber-Data-Answer to server
    * 
    * @param answer Insert-Subscriber-Data-Answer event instance
@@ -131,4 +142,6 @@ public interface ClientS6aSession extends AppSession, StateMachine {
    */
   void sendResetAnswer(JResetAnswer answer) throws InternalException, IllegalDiameterStateException, RouteException, OverloadException;
 
+  
+  
 }

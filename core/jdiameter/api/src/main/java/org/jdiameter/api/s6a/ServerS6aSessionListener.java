@@ -62,10 +62,14 @@ public interface ServerS6aSessionListener {
 
   void doCancelLocationAnswerEvent(ServerS6aSession session, JCancelLocationRequest request, JCancelLocationAnswer answer) throws InternalException, IllegalDiameterStateException, RouteException, OverloadException;
 
+  //added by tharaka
+  void doCancelLocationRequestEvent(ServerS6aSession session, JCancelLocationRequest request) throws InternalException, IllegalDiameterStateException, RouteException, OverloadException;
+  
   void doInsertSubscriberDataAnswerEvent(ServerS6aSession session, JInsertSubscriberDataRequest request, JInsertSubscriberDataAnswer answer) throws InternalException, IllegalDiameterStateException, RouteException, OverloadException;
 
   void doDeleteSubscriberDataAnswerEvent(ServerS6aSession session, JDeleteSubscriberDataRequest request, JDeleteSubscriberDataAnswer answer) throws InternalException, IllegalDiameterStateException, RouteException, OverloadException;
 
   void doResetAnswerEvent(ServerS6aSession session, JResetRequest request, JResetAnswer answer) throws InternalException, IllegalDiameterStateException, RouteException, OverloadException;
 
+  
 }

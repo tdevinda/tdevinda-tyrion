@@ -40,6 +40,7 @@ public class Event implements StateEvent {
     RECEIVE_ULA,
     RECEIVE_NOA,
     RECEIVE_CLR,
+    RECEIVE_CLA,
     RECEIVE_IDR,
     RECEIVE_DSR,
     RECEIVE_RSR;

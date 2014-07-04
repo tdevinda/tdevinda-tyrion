@@ -31,6 +31,7 @@ import org.jdiameter.api.app.AppRequestEvent;
 import org.jdiameter.api.app.AppSession;
 import org.jdiameter.api.s6a.events.JAuthenticationInformationAnswer;
 import org.jdiameter.api.s6a.events.JAuthenticationInformationRequest;
+import org.jdiameter.api.s6a.events.JCancelLocationAnswer;
 import org.jdiameter.api.s6a.events.JCancelLocationRequest;
 import org.jdiameter.api.s6a.events.JDeleteSubscriberDataRequest;
 import org.jdiameter.api.s6a.events.JInsertSubscriberDataRequest;
@@ -50,7 +51,7 @@ public interface ClientS6aSessionListener {
 
   void doOtherEvent(AppSession session, AppRequestEvent request, AppAnswerEvent answer) throws InternalException, IllegalDiameterStateException, RouteException, OverloadException;
 
-  void doCancelLocationRequestEvent(ClientS6aSession session, JCancelLocationRequest request) throws InternalException, IllegalDiameterStateException, RouteException, OverloadException;
+  //void doCancelLocationRequestEvent(ClientS6aSession session, JCancelLocationRequest request) throws InternalException, IllegalDiameterStateException, RouteException, OverloadException;
 
   void doInsertSubscriberDataRequestEvent(ClientS6aSession session, JInsertSubscriberDataRequest request) throws InternalException, IllegalDiameterStateException, RouteException, OverloadException;
 
@@ -66,4 +67,6 @@ public interface ClientS6aSessionListener {
 
   void doNotifyAnswerEvent(ClientS6aSession session, JNotifyRequest request, JNotifyAnswer answer) throws InternalException, IllegalDiameterStateException, RouteException, OverloadException;
 
+  //[THARAKA]
+  void doCancelLocationAnswerEvent(ClientS6aSession session, JCancelLocationRequest request, JCancelLocationAnswer answer) throws InternalException, IllegalDiameterStateException, RouteException, OverloadException;
 }

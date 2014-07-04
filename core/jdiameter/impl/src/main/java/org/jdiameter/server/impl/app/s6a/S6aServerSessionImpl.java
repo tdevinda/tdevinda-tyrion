@@ -111,6 +111,10 @@ public class S6aServerSessionImpl extends S6aSession implements ServerS6aSession
   public void sendCancelLocationRequest(JCancelLocationRequest request) throws InternalException, IllegalDiameterStateException, RouteException, OverloadException {
     send(Event.Type.SEND_MESSAGE, request, null);
   }
+  
+  public void sendCancelLocationAnswer(JCancelLocationAnswer answer) throws InternalException, IllegalDiameterStateException, RouteException, OverloadException {
+		send(Event.Type.SEND_MESSAGE, null, answer);
+	}
 
   public void sendInsertSubscriberDataRequest(JInsertSubscriberDataRequest request) throws InternalException, IllegalDiameterStateException, RouteException, OverloadException {
     send(Event.Type.SEND_MESSAGE, request, null);
@@ -141,6 +145,7 @@ public class S6aServerSessionImpl extends S6aSession implements ServerS6aSession
     try {
       sendAndStateLock.lock();
       if (!super.session.isValid()) {
+    	  logger.info("{S6a handleEvent} session not valid");
         // FIXME: throw new InternalException("Generic session is not valid.");
         return false;
       }
@@ -170,7 +175,17 @@ public class S6aServerSessionImpl extends S6aSession implements ServerS6aSession
               setState(newState);
               listener.doPurgeUERequestEvent(this, (JPurgeUERequest) event.getData());
               break;
-
+              
+              //[THARAKA]
+            case RECEIVE_CLR:
+            	this.sessionData.setBuffer((Request) ((AppEvent) event.getData()).getMessage());
+            	super.cancelMsgTimer();
+            	super.startMsgTimer();
+            	newState = S6aSessionState.MESSAGE_SENT_RECEIVED;
+            	setState(newState);
+            	listener.doCancelLocationRequestEvent(this, (JCancelLocationRequest) event.getData());
+            	break;
+            	
             case RECEIVE_ULR:
               this.sessionData.setBuffer((Request) ((AppEvent) event.getData()).getMessage());
               super.cancelMsgTimer();
@@ -412,7 +427,11 @@ public class S6aServerSessionImpl extends S6aSession implements ServerS6aSession
           case JNotifyRequest.code:
             handleEvent(new Event(Event.Type.RECEIVE_NOR, messageFactory.createNotifyRequest(request), null));
             break;
-
+            
+          case JCancelLocationRequest.code:
+        	  handleEvent(new Event(Event.Type.RECEIVE_CLR, messageFactory.createCancelLocationRequest(request), null));
+        	  break;
+        	  
           default:
             listener.doOtherEvent(session, new AppRequestEventImpl(request), null);
             break;

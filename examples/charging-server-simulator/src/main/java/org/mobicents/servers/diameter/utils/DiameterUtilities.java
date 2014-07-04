@@ -63,16 +63,19 @@ public class DiameterUtilities {
           isGrouped = true;
         }
         else {
-          avpValue = avp.getOctetString().replaceAll("\r", "").replaceAll("\n", "");
+          //avpValue = avp.getOctetString().replaceAll("\r", "").replaceAll("\n", "");
+          avpValue = "Other";
         }
       }
       catch (Exception ignore) {
-        try {
-          avpValue = avp.getOctetString().replaceAll("\r", "").replaceAll("\n", "");
+    	  avpValue = "Other"; 
+    	  
+    	  /*try {
+        	avpValue = avp.getOctetString().replaceAll("\r", "").replaceAll("\n", "");
         }
         catch (AvpDataException e) {
           avpValue = avp.toString();
-        }
+        }*/
       }
 
       String avpLine = indentation + avp.getCode() + ": " + avpRep.getName();
