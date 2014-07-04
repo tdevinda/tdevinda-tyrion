@@ -204,6 +204,7 @@ public class S6aClientSessionImpl extends S6aSession implements ClientS6aSession
 
 			case IDLE:
 				switch (eventType) {
+				/*
 				case RECEIVE_CLR:
 					this.sessionData.setBuffer( (Request) ((AppEvent) event.getData()).getMessage());
 					super.startMsgTimer();
@@ -211,7 +212,7 @@ public class S6aClientSessionImpl extends S6aSession implements ClientS6aSession
 					setState(newState);
 					listener.doCancelLocationRequestEvent(this, (JCancelLocationRequest) event.getData());
 					break;
-					
+					*/
 				case RECEIVE_IDR:
 					newState = S6aSessionState.MESSAGE_SENT_RECEIVED;
 					setState(newState);
@@ -488,5 +489,6 @@ public class S6aClientSessionImpl extends S6aSession implements ClientS6aSession
 			}
 		}
 	}
+
 
 }
