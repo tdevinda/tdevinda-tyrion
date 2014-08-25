@@ -25,6 +25,7 @@ package org.mobicents.diameter.dictionary;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
@@ -108,6 +109,7 @@ public class AvpDictionary {
 		AvpRepresentation avp = avpMap.get(getMapKey(code, vendorId));
 
 		if (avp == null) {
+			//System.out.println("[THARAKA]"+ Arrays.toString(Thread.currentThread().getStackTrace()));
 			logger.warn("AVP with code " + code + " and Vendor-Id " + vendorId + " not present in dictionary!");
 		}
 

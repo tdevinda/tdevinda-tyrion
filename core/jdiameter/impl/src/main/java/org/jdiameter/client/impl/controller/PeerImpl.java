@@ -754,7 +754,20 @@ public class PeerImpl extends AbstractPeer implements IPeer {
       IMessage message = parser.createEmptyMessage(CAPABILITIES_EXCHANGE_REQUEST, 0);
       message.setRequest(true);
       message.setHopByHopIdentifier(getHopByHopIdentifier());
-
+      
+      //[THARAKA] waiting to send CER until appIDs are registred
+      //FIXME: find a better way to do this. this is hell!
+      int retries = 20;
+      while(metaData.getLocalPeer().getCommonApplications().size() < 4 && retries-- > 0) {
+    	  try {
+			Thread.sleep(10000);
+			logger.debug("Slept for 10s until appIDs get registered "+ retries + "/ 20");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+      }
+      
+      
       if (useUriAsFQDN) {
         message.getAvps().addAvp(ORIGIN_HOST, metaData.getLocalPeer().getUri().toString(), true, false, true);
       }

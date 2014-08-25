@@ -329,13 +329,17 @@ public class PeerImpl extends org.jdiameter.client.impl.controller.PeerImpl impl
           }
         }
         IRealmTable realmTable = router.getRealmTable();
-
+        
+        //FIXME: [THARAKA] commented to use in non-self realms
+        /*
+         *
         if (!realmTable.realmExists(destRealm)) {
           // send no such realm answer.
           logger.warn("Received a request for an unrecognized realm: [{}]. Answering with 3003 (DIAMETER_REALM_NOT_SERVED) Result-Code.", destRealm);
           sendErrorAnswer(message, null, ResultCode.REALM_NOT_SERVED);
           return true;
         }
+        */
         ApplicationId appId = message.getSingleApplicationId();
         if (appId == null) {
           logger.warn("Receive a message with no Application Id. Answering with 5005 (MISSING_AVP) Result-Code.");
